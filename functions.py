@@ -118,8 +118,13 @@ if __name__ == "__main__":
     countC = np.count_nonzero(np.logical_or(A==2,A==-2),axis=0)    #Center
     countR = np.count_nonzero(np.logical_or(A==3,A==-3),axis=0)    #Right
 
+
     countE =np.count_nonzero(A<0,axis = 0)   #West occurences
     countW =np.count_nonzero(A>0,axis = 0)    #East occurences
+
+    #detect zero occurences
+    countZeros=np.count_nonzero(A==0,axis = 0)
+    print("zero occurences: ",countZeros)
 
     #P(X2 | e1:3)
     x2=[countL[2]/n,countC[2]/n,countR[2]/n]
