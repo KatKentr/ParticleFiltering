@@ -95,7 +95,7 @@ def resample(sum,w,tableA,tableB,t):
 if __name__ == "__main__":
 #κωδικοποιηση: LE=1, CE=2, RE=3, LW=-1,CW=-2,RW=-3
 
-    n=10000 #number of samples (slow performance with 10000 samples)
+    n=1000 #number of samples (slow performance with 10000 samples)
     timesteps=5  #number of timesteps
     e = np.array(["","C", "L", "L"], dtype="object")   #observations
     A=np.zeros((n,timesteps),dtype=int)        #initalize tables
@@ -128,18 +128,24 @@ if __name__ == "__main__":
     countW =np.count_nonzero(A>0,axis = 0)    #East occurences
 
     #detect zero occurences , only for debugging purposes
-    # countZeros=np.count_nonzero(A==0,axis = 0)
-    # print("zero occurences: ",countZeros)
+    countZeros=np.count_nonzero(A==0,axis = 0)
+    print("zero occurences: ",countZeros)
 
     #P(X2 | e1:3)
     x2=[countL[2]/n,countC[2]/n,countR[2]/n]
     print("P(X2) ",x2)
+
     #P(X3 | e1:3)
     x3=[countL[3]/n,countC[3]/n,countR[3]/n]
     print("P(X3) ",x3)
+
     #P(X4 | e1:3)
     x4=[countL[4]/n,countC[4]/n,countR[4]/n]
     print("P(X4) ",x4)
+
+    #P(A2|e1:3)
+    A2=[countE[2]/n,countW[2]/n]
+    print("P(A2) ",A2)
 
     #P(A3 | e1:3)
     A3=[countE[3]/n,countW[3]/n]
