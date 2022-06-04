@@ -22,7 +22,7 @@ def repopulate(tableA,t):
                 tableA[row,t]=-tableA[row,t]   #W
 
         elif tableA[row,t-1]==-1:  #LW
-            tableA[row,t]=np.random.choice([1,2])
+            tableA[row,t]=np.random.choice([-1,-2])
             if x>0.7:
                 tableA[row,t]=-tableA[row,t]   #E
 
@@ -32,7 +32,7 @@ def repopulate(tableA,t):
                 tableA[row,t]=-tableA[row,t]    #W
 
         elif tableA[row,t-1]==-2:  #CW
-            tableA[row,t]=np.random.choice([2,3])
+            tableA[row,t]=np.random.choice([-2,-3])
             if x>0.7:
                 tableA[row,t]=-tableA[row,t]  #E
 
@@ -42,7 +42,7 @@ def repopulate(tableA,t):
                 tableA[row,t]=-tableA[row,t]    #W
 
         elif tableA[row,t-1]==-3: #RW
-            tableA[row,t]=3
+            tableA[row,t]=-3
             if x>0.7:
                 tableA[row,t]=-tableA[row,t]  #E
 
@@ -95,7 +95,7 @@ def resample(sum,w,tableA,tableB,t):
 if __name__ == "__main__":
 #κωδικοποιηση: LE=1, CE=2, RE=3, LW=-1,CW=-2,RW=-3
 
-    n=1000 #number of samples (slow performance with 10000 samples)
+    n=10000 #number of samples (slow performance with 10000 samples)
     timesteps=5  #number of timesteps
     e = np.array(["","C", "L", "L"], dtype="object")   #observations
     A=np.zeros((n,timesteps),dtype=int)        #initalize tables
@@ -124,8 +124,8 @@ if __name__ == "__main__":
     countR = np.count_nonzero(np.logical_or(A==3,A==-3),axis=0)    #Right
 
 
-    countE =np.count_nonzero(A<0,axis = 0)   #West occurences
-    countW =np.count_nonzero(A>0,axis = 0)    #East occurences
+    countW =np.count_nonzero(A<0,axis = 0)   #West occurences
+    countE =np.count_nonzero(A>0,axis = 0)    #East occurences
 
     #detect zero occurences , only for debugging purposes
     countZeros=np.count_nonzero(A==0,axis = 0)
